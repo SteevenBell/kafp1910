@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Форма №{{ form_obj.id }} {% endblock %}
+
+{% block content %}
+    <p class="fs-2">Форма №{{ form_obj.id }}</p>
+
+    <ul class="list-group">
+        {% for k, v in form_obj.data.items() %}
+            <li class="list-group-item">
+                {{ k }} : {{ v }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

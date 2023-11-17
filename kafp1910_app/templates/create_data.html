@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Добавить данные {% endblock %}
+
+{% block content %}
+    <form method="post">
+        <div class="mb-3" id="addDiv">
+            <p>
+                <label for="field" class="form-label">Field 1:</label>
+                <input type="text" class="form-control" id="field" name="field" required>
+            </p>
+        </div>
+
+        <button type="button" id="addField" class="btn btn-primary">Добавить поле</button>
+        <button type="submit" class="btn btn-primary">Сохранить данные</button>
+    </form>
+
+    <script>
+        $("#addField").click(function () {
+            const index = $("#addDiv").children().length + 1;
+            const fieldId = `field${index}`;
+            const fieldLabel = `Field ${index}:`
+
+            const fieldInput = `<p>
+                <label for="${fieldId}" class="form-label">${fieldLabel}</label>
+                <input type="text" class="form-control" name="${fieldId}" id="${fieldId}" required />
+            </p>`
+
+            $("#addDiv").append(fieldInput);
+        });
+
+        $("form").submit(function(){
+            const url = "{{ url_for('create_list_forms') }}";
+            $.post(url, $("form").serialize());
+        });
+    </script>
+{% endblock %}
